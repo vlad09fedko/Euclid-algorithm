@@ -2,14 +2,14 @@
 
 function findGreatestCommonDivisor(a, b) {
   try {
-    if (typeof (a || b) !== 'number' || !Number.isFinite(a || b)) {
-      throw TypeError('Data must be numbers!');
+    if (!Number.isFinite(a || b) || !Number.isInteger(a || b)) {
+      throw TypeError('Data must be integer numbers.');
     }
-    if ((a || b) <= 0) throw RangeError('Numbers must be positive!');
+    if ((a || b) <= 0) throw RangeError('Numbers must be positive.');
     if (b === 0) return a;
     return findGreatestCommonDivisor(b, a % b);
   } catch (error) {
-    return error.message;
+    return `Error! ${error.message}`;
   }
 }
 
