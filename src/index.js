@@ -1,15 +1,16 @@
 'use strict';
 
 function findGreatestCommonDivisor(a, b) {
-  if (!Number.isFinite(a || b)) throw TypeError('Data must be numbers!');
-  if (b === 0) return a;
-  return findGreatestCommonDivisor(b, a % b);
+  try {
+    if (typeof (a || b) !== 'number' || !Number.isFinite(a || b)) {
+      throw TypeError('Data must be numbers!');
+    }
+    if ((a || b) <= 0) throw RangeError('Numbers must be positive!');
+    if (b === 0) return a;
+    return findGreatestCommonDivisor(b, a % b);
+  } catch (error) {
+    return error.message;
+  }
 }
 
-try {
-  const start = Date.now();
-  console.log(findGreatestCommonDivisor(1239, 301));
-  console.log(`Lead time: ${Date.now() - start} ms`);
-} catch (error) {
-  console.error(error.message);
-}
+console.log(`Result: ${findGreatestCommonDivisor(1239, 301)}`);
